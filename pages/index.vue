@@ -31,8 +31,8 @@ export default {
       items: [
         { id: 1, name: 'Maksat', balance: 50 },
         { id: 2, name: 'Sultan', balance: 30 },
-        { id: 5, name: 'Sultan', balance: 15 },
-        { id: 17, name: 'Sultan', balance: 20 },
+        { id: 5, name: 'Esimkhan', balance: 15 },
+        { id: 17, name: 'Jambyl', balance: 20 },
       ],
     }
   },
