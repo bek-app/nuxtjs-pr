@@ -6,11 +6,36 @@
       :fields="fields"
       :tbody-tr-class="rowClass"
     >
-      <template #cell(btn)="data">
-        <b-button variant="primary" @click="added(data.item)">Қосу</b-button>
-        <b-button variant="danger" @click="removed(data.item)">Өшіру</b-button>
-      </template></b-table
-    >
+      <template #cell(btn)="">
+        <b-button variant="primary" @click="$bvModal.show('bv-modal-example')"
+          >Қосу</b-button
+        >
+        <b-button variant="danger"> Өшіру</b-button>
+      </template>
+    </b-table>
+    <div>
+      <b-modal id="bv-modal-example" hide-footer>
+        <template #modal-title> Using <code>$bvModal</code> Methods </template>
+        <div class="d-block text-center">
+          <div>
+            <b-form-select
+              v-model="selected"
+              :options="users"
+              value-field="id"
+              text-field="name"
+            >
+            </b-form-select>
+
+            <div class="mt-3">
+              Selected: <strong>{{ selected }}</strong>
+            </div>
+          </div>
+        </div>
+        <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
+          >Close Me</b-button
+        >
+      </b-modal>
+    </div>
   </b-container>
 </template>
 
@@ -83,19 +108,18 @@ export default {
           _cellVariants: { status: 'danger' },
         },
       ],
+      users: [
+        { id: 1, name: 'Maksat' },
+        { id: 2, name: 'Sultan' },
+        { id: 5, name: 'Esimkhan' },
+        { id: 17, name: 'Jambyl' },
+      ],
     }
   },
   methods: {
     rowClass(item, type) {
       if (!item || type !== 'row') return
       if (item.status === 'awesome') return 'table-busy'
-    },
-
-    added(item) {
-      console.log(item.pc + ' ' + item.name)
-    },
-    removed(item) {
-      console.log(item.pc)
     },
   },
 }
