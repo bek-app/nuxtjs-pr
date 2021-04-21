@@ -1,6 +1,7 @@
 <template>
-  <b-container class="mt-5">
-    <b-table striped hover :items="items" :fields="fields">
+  <b-container class="mt-3">
+    <Navbar />
+    <b-table class="mt-5" striped hover :items="items" :fields="fields">
       <template #cell(index)="data">
         {{ data.index + 1 }}
       </template>

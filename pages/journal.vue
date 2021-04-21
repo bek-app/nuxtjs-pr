@@ -1,6 +1,8 @@
 <template>
   <b-container class="mt-3 wrap">
+    <Navbar />
     <b-table
+      class="mt-5"
       responsive="sm"
       :items="items"
       :fields="fields"
@@ -15,7 +17,7 @@
     </b-table>
     <div>
       <b-modal id="bv-modal-example" hide-footer>
-        <template #modal-title> Using <code>$bvModal</code> Methods </template>
+        <template #modal-title> Журналға енгізу </template>
         <div class="d-block text-center">
           <div>
             <b-form-select
@@ -26,13 +28,12 @@
             >
             </b-form-select>
 
-            <div class="mt-3">
-              Selected: <strong>{{ selected }}</strong>
-            </div>
+            <div class="mt-3"></div>
           </div>
         </div>
-        <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
-          >Close Me</b-button
+        <b-button variant="success" class="mt-3"> Қосу</b-button>
+        <b-button class="mt-3" @click="$bvModal.hide('bv-modal-example')"
+          >Терезені жабу</b-button
         >
       </b-modal>
     </div>
@@ -108,6 +109,7 @@ export default {
           _cellVariants: { status: 'danger' },
         },
       ],
+
       users: [
         { id: 1, name: 'Maksat' },
         { id: 2, name: 'Sultan' },
