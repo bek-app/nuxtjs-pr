@@ -100,7 +100,7 @@ export default {
           start_time: '15:00',
           pc: 'PC1',
           end_time: '15:30',
-          busy: false,
+          busy: true,
         },
         {
           user: null,
@@ -142,8 +142,8 @@ export default {
         (user) => user.id === this.selectedUserId
       )
       this.selectedPS.user = selectedUser
-
-      this.item.busy = true
+      item.end_time = null
+      item.busy = true
 
       this.$bvModal.hide('bv-modal-example')
     },
@@ -154,7 +154,9 @@ export default {
     },
 
     stopTime(item) {
+      item.user = null
       item.busy = false
+      item.start_time = null
 
       this.$bvModal.show('my-modal')
     },
