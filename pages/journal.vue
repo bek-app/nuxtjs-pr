@@ -11,12 +11,14 @@
       <template #cell(name)="data">
         {{ data.item.user && data.item.user.name }}
       </template>
-
       <template #cell(status)="data">
         <h3>
           <b-badge v-if="data.item.busy" variant="danger">бос емес</b-badge>
           <b-badge v-else variant="success">бос</b-badge>
         </h3>
+      </template>
+      <template #cell(summ)="data">
+        {{ data.item.summ }}
       </template>
       <template #cell(btn)="data">
         <b-button
@@ -34,7 +36,11 @@
         >
       </template>
     </b-table>
-    <b-modal id="my-modal">Hello From My Modal! </b-modal>
+    <b-modal id="my-modal" hide-footer>
+      <b-button block variant="primary" @click="closeTime()"
+        >Жабу</b-button
+      ></b-modal
+    >
     <div>
       <b-modal id="bv-modal-example" hide-footer>
         <template #modal-title> Журналға енгізу </template>
@@ -47,11 +53,9 @@
               text-field="name"
             >
             </b-form-select>
-
-            <div class="mt-3"></div>
           </div>
         </div>
-        <b-button variant="success" class="mt-3" @click="addItem(data.item)">
+        <b-button variant="success" class="mt-3" @click="addItem()">
           Қосу</b-button
         >
         <b-button class="mt-3" @click="$bvModal.hide('bv-modal-example')"
@@ -89,6 +93,7 @@ export default {
           key: 'status',
           label: 'Статусы',
         },
+        { key: 'summ', label: 'Толық сумма' },
         {
           key: 'btn',
           label: '',
@@ -97,31 +102,35 @@ export default {
       items: [
         {
           user: null,
-          start_time: '15:00',
+          start_time: null,
           pc: 'PC1',
-          end_time: '15:30',
-          busy: true,
+          end_time: null,
+          summ: null,
+          busy: false,
         },
         {
           user: null,
-          start_time: '12:20',
+          start_time: null,
           pc: 'PC2',
-          end_time: '13:10',
-          busy: true,
+          end_time: null,
+          summ: null,
+          busy: false,
         },
         {
           user: null,
-          start_time: '12:20',
+          start_time: null,
           pc: 'PC3',
-          end_time: '13:10',
-          busy: true,
+          end_time: null,
+          summ: null,
+          busy: false,
         },
         {
           user: null,
-          start_time: '12:20',
+          start_time: null,
           pc: 'PC4',
-          end_time: '13:10',
-          busy: true,
+          end_time: null,
+          summ: null,
+          busy: false,
         },
       ],
 
@@ -136,28 +145,33 @@ export default {
     }
   },
   methods: {
-    addItem(item) {
+    addItem() {
       if (!this.selectedUserId) return
       const selectedUser = this.users.find(
         (user) => user.id === this.selectedUserId
       )
       this.selectedPS.user = selectedUser
-      item.end_time = null
-      item.busy = true
+      this.selectedPS.busy = true
+      this.selectedPS.end_time = null
+      this.selectedPS.start_time = new Date()
 
       this.$bvModal.hide('bv-modal-example')
     },
-    openTime(pc) {
-      this.selectedPS = pc
+    openTime(ps) {
+      this.selectedPS = ps
 
       this.$bvModal.show('bv-modal-example')
     },
 
-    stopTime(item) {
-      item.user = null
-      item.busy = false
-      item.start_time = null
+    closeTime() {
+      this.selectedPS.user = null
+      this.selectedPS.busy = false
+      this.selectedPS.start_time = null
 
+      this.$bvModal.hide('my-modal')
+    },
+    stopTime(ps) {
+      this.selectedPS = ps
       this.$bvModal.show('my-modal')
     },
   },
