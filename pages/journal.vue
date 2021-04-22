@@ -8,20 +8,40 @@
       :fields="fields"
       :tbody-tr-class="rowClass"
     >
-      <template #cell(btn)="">
-        <b-button variant="primary" @click="$bvModal.show('bv-modal-example')"
-          >Қосу</b-button
+      <template #cell(name)="data">
+        {{ data.item.user && data.item.user.name }}
+      </template>
+
+      <template #cell(status)="data">
+        <h3>
+          <b-badge v-if="data.item.busy" variant="danger">бос емес</b-badge>
+          <b-badge v-else variant="success">бос</b-badge>
+        </h3>
+      </template>
+      <template #cell(btn)="data">
+        <b-button
+          v-b-modal="'my-modal'"
+          variant="danger"
+          v-if="data.item.busy"
+          @click="stopTime(data.item)"
+          block
         >
-        <b-button variant="danger"> Өшіру</b-button>
+          Жабу</b-button
+        >
+
+        <b-button block variant="primary" @click="openTime(data.item)" v-else
+          >Ашу</b-button
+        >
       </template>
     </b-table>
+    <b-modal id="my-modal">Hello From My Modal! </b-modal>
     <div>
       <b-modal id="bv-modal-example" hide-footer>
         <template #modal-title> Журналға енгізу </template>
         <div class="d-block text-center">
           <div>
             <b-form-select
-              v-model="selected"
+              v-model="selectedUserId"
               :options="users"
               value-field="id"
               text-field="name"
@@ -31,7 +51,9 @@
             <div class="mt-3"></div>
           </div>
         </div>
-        <b-button variant="success" class="mt-3"> Қосу</b-button>
+        <b-button variant="success" class="mt-3" @click="addItem(data.item)">
+          Қосу</b-button
+        >
         <b-button class="mt-3" @click="$bvModal.hide('bv-modal-example')"
           >Терезені жабу</b-button
         >
@@ -48,12 +70,10 @@ export default {
         {
           key: 'pc',
           label: 'PC',
-          sortable: true,
         },
         {
           key: 'name',
           label: 'Аты-жөні',
-          sortable: true,
         },
         {
           key: 'start_time',
@@ -68,7 +88,6 @@ export default {
         {
           key: 'status',
           label: 'Статусы',
-          sortable: true,
         },
         {
           key: 'btn',
@@ -77,36 +96,32 @@ export default {
       ],
       items: [
         {
-          name: 'Asan',
+          user: null,
           start_time: '15:00',
           pc: 'PC1',
           end_time: '15:30',
-          status: 'success',
-          _cellVariants: { status: 'success' },
+          busy: false,
         },
         {
-          name: 'Esen',
+          user: null,
           start_time: '12:20',
           pc: 'PC2',
           end_time: '13:10',
-          status: 'busy',
-          _cellVariants: { status: 'danger' },
+          busy: true,
         },
         {
-          name: 'Maks',
+          user: null,
           start_time: '12:20',
           pc: 'PC3',
           end_time: '13:10',
-          status: 'success',
-          _cellVariants: { status: 'success' },
+          busy: true,
         },
         {
-          name: 'Isa',
+          user: null,
           start_time: '12:20',
           pc: 'PC4',
           end_time: '13:10',
-          status: 'busy',
-          _cellVariants: { status: 'danger' },
+          busy: true,
         },
       ],
 
@@ -116,12 +131,32 @@ export default {
         { id: 5, name: 'Esimkhan' },
         { id: 17, name: 'Jambyl' },
       ],
+      selectedPS: null,
+      selectedUserId: null,
     }
   },
   methods: {
-    rowClass(item, type) {
-      if (!item || type !== 'row') return
-      if (item.status === 'awesome') return 'table-busy'
+    addItem(item) {
+      if (!this.selectedUserId) return
+      const selectedUser = this.users.find(
+        (user) => user.id === this.selectedUserId
+      )
+      this.selectedPS.user = selectedUser
+
+      this.item.busy = true
+
+      this.$bvModal.hide('bv-modal-example')
+    },
+    openTime(pc) {
+      this.selectedPS = pc
+
+      this.$bvModal.show('bv-modal-example')
+    },
+
+    stopTime(item) {
+      item.busy = false
+
+      this.$bvModal.show('my-modal')
     },
   },
 }

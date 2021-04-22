@@ -1,7 +1,14 @@
 <template>
   <b-container>
     <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand href="#">NuxtJs</b-navbar-brand>
+      <b-navbar-brand
+        class="nav-link"
+        no-prefetch
+        exact
+        active-class="active"
+        to="/"
+        >NuxtJs</b-navbar-brand
+      >
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -13,7 +20,7 @@
             exact
             active-class="active"
             to="/"
-            >Home
+            >Басты бет
           </b-nav-item>
           <b-nav-item
             class="nav-link"
@@ -21,7 +28,7 @@
             exact
             active-class="active"
             to="/journal"
-            >Journal
+            >Журнал
           </b-nav-item>
           <b-nav-item
             class="nav-link"

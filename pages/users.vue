@@ -1,3 +1,3 @@
 <template>
-  <b-container class="mt-5"><Navbar /></b-container>
+  <b-container class="mt-3"><Navbar /></b-container>
 </template>
