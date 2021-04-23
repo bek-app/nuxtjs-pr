@@ -11,6 +11,9 @@
       <template #cell(name)="data">
         {{ data.item.user && data.item.user.name }}
       </template>
+      <template #cell(start_time)="data">
+        {{ data.item.start_time | formatDate1 }}
+      </template>
       <template #cell(status)="data">
         <h3>
           <b-badge v-if="data.item.busy" variant="danger">бос емес</b-badge>
@@ -70,6 +73,7 @@
 export default {
   data() {
     return {
+      date: new Date(),
       fields: [
         {
           key: 'pc',
@@ -154,7 +158,6 @@ export default {
       this.selectedPS.busy = true
       this.selectedPS.end_time = null
       this.selectedPS.start_time = new Date()
-
       this.$bvModal.hide('bv-modal-example')
     },
     openTime(ps) {
@@ -166,7 +169,6 @@ export default {
     closeTime() {
       this.selectedPS.user = null
       this.selectedPS.busy = false
-      this.selectedPS.start_time = null
 
       this.$bvModal.hide('my-modal')
     },
@@ -174,6 +176,10 @@ export default {
       this.selectedPS = ps
       this.$bvModal.show('my-modal')
     },
+  },
+  filters: {
+    formatDate1: (d) =>
+      d ? d.toLocaleTimeString('ru-RU').replace(',', '').slice(0, -3) : ' ',
   },
 }
 </script>
