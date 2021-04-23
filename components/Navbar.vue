@@ -27,8 +27,8 @@
             no-prefetch
             exact
             active-class="active"
-            to="/journal"
-            >Журнал
+            to="/realtime"
+            >Real Time
           </b-nav-item>
           <b-nav-item
             class="nav-link"
@@ -37,6 +37,14 @@
             active-class="active"
             to="/users"
             >Users
+          </b-nav-item>
+          <b-nav-item
+            class="nav-link"
+            no-prefetch
+            exact
+            active-class="active"
+            to="/journal"
+            >Journal
           </b-nav-item>
         </b-navbar-nav>
 
@@ -76,3 +84,8 @@
 <script>
 export default {}
 </script>
+<style scoped>
+body {
+  font-family: 'Antonio', sans-serif;
+}
+</style>
