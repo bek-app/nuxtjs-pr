@@ -3,7 +3,7 @@
     <Navbar />
     <b-table
       class="mt-5"
-      responsive="sm"
+      responsive="md"
       :items="items"
       :fields="fields"
       :tbody-tr-class="rowClass"
@@ -13,6 +13,9 @@
       </template>
       <template #cell(start_time)="data">
         {{ data.item.start_time | formatDate1 }}
+      </template>
+      <template #cell(end_time)="data">
+        {{ data.item.end_time | formatDate1 }}
       </template>
       <template #cell(status)="data">
         <h3>
@@ -158,6 +161,7 @@ export default {
       this.selectedPS.busy = true
       this.selectedPS.end_time = null
       this.selectedPS.start_time = new Date()
+      this.selectedPS.summ = null
       this.$bvModal.hide('bv-modal-example')
     },
     openTime(ps) {
@@ -169,7 +173,13 @@ export default {
     closeTime() {
       this.selectedPS.user = null
       this.selectedPS.busy = false
-
+      this.selectedPS.end_time = new Date()
+      const totalSumm =
+        ((this.selectedPS.end_time - this.selectedPS.start_time) /
+          1000 /
+          3600) *
+        400
+      this.selectedPS.summ = totalSumm
       this.$bvModal.hide('my-modal')
     },
     stopTime(ps) {
