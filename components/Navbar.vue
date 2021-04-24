@@ -20,7 +20,7 @@
             exact
             active-class="active"
             to="/"
-            >Басты бет
+            >Home
           </b-nav-item>
           <b-nav-item
             class="nav-link"
