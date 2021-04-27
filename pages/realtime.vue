@@ -23,8 +23,8 @@
           <b-badge v-else variant="success">бос</b-badge>
         </h3>
       </template>
-      <template #cell(summ)="data" class="text-center">
-        {{ data.item.summ }} ₸
+      <template #cell(sum)="data" class="text-center">
+        {{ data.item.sum }} ₸
       </template>
       <template #cell(btn)="data">
         <b-button
@@ -32,19 +32,23 @@
           v-b-modal="'my-modal'"
           variant="danger"
           block
-          @click="stopTime(data.item)"
+          @click="hideModalTime(data.item)"
         >
           Жабу</b-button
         >
 
-        <b-button v-else block variant="primary" @click="openTime(data.item)"
+        <b-button
+          v-else
+          block
+          variant="primary"
+          @click="showModalTime(data.item)"
           >Ашу</b-button
         >
       </template>
     </b-table>
     <b-modal id="my-modal" hide-footer>
       <b-button block variant="primary" @click="closeTime()"
-        >Жабу</b-button
+        >pc жабу</b-button
       ></b-modal
     >
     <div>
@@ -104,56 +108,24 @@ export default {
           key: 'status',
           label: 'Статусы',
         },
-        { key: 'summ', label: 'Толық сумма' },
+        { key: 'sum', label: 'Толық сумма' },
         {
           key: 'btn',
           label: '',
         },
       ],
-      items: [
-        {
-          user: null,
-          start_time: null,
-          pc: 'PC1',
-          end_time: null,
-          summ: null,
-          busy: false,
-        },
-        {
-          user: null,
-          start_time: null,
-          pc: 'PC2',
-          end_time: null,
-          summ: null,
-          busy: false,
-        },
-        {
-          user: null,
-          start_time: null,
-          pc: 'PC3',
-          end_time: null,
-          summ: null,
-          busy: false,
-        },
-        {
-          user: null,
-          start_time: null,
-          pc: 'PC4',
-          end_time: null,
-          summ: null,
-          busy: false,
-        },
-      ],
 
-      users: [
-        { id: 1, name: 'Maksat' },
-        { id: 2, name: 'Sultan' },
-        { id: 5, name: 'Esimkhan' },
-        { id: 17, name: 'Jambyl' },
-      ],
       selectedPS: null,
       selectedUserId: null,
     }
+  },
+  computed: {
+    items() {
+      return this.$store.state.realtime.items
+    },
+    users() {
+      return this.$store.state.users.users
+    },
   },
   methods: {
     addItem() {
@@ -161,33 +133,59 @@ export default {
       const selectedUser = this.users.find(
         (user) => user.id === this.selectedUserId
       )
-      this.selectedPS.user = selectedUser
-      this.selectedPS.busy = true
-      this.selectedPS.end_time = null
-      this.selectedPS.start_time = new Date()
-      this.selectedPS.summ = null
+      const newData = {
+        user: selectedUser,
+        busy: true,
+        end_time: null,
+        start_time: new Date(),
+        sum: null,
+      }
+
+      this.$store.commit('realtime/changePS', {
+        ps: this.selectedPS,
+        newData,
+      })
+
       this.$bvModal.hide('bv-modal-example')
     },
-    openTime(ps) {
+
+    closeTime() {
+      const endTime = new Date()
+      const totalSum = Math.floor(
+        ((endTime - this.selectedPS.start_time) / 1000 / 3600) * 800
+      )
+      const logItem = {
+        user: this.selectedPS.user.name,
+        start_time: this.selectedPS.start_time,
+        pc: this.selectedPS.pc,
+        end_time: endTime,
+        sum: totalSum,
+      }
+
+      this.$store.commit('log/addLog', logItem)
+
+      const newData = {
+        user: null,
+        busy: false,
+        end_time: endTime,
+        start_time: null,
+        sum: totalSum,
+      }
+
+      this.$store.commit('realtime/closeTime', {
+        ps: this.selectedPS,
+
+        newData,
+      })
+
+      this.$bvModal.hide('my-modal')
+    },
+    showModalTime(ps) {
       this.selectedPS = ps
 
       this.$bvModal.show('bv-modal-example')
     },
-
-    closeTime() {
-      this.selectedPS.user = null
-      this.selectedPS.busy = false
-      this.selectedPS.end_time = new Date()
-      const totalSumm = Math.ceil(
-        ((this.selectedPS.end_time - this.selectedPS.start_time) /
-          1000 /
-          3600) *
-          800
-      )
-      this.selectedPS.summ = totalSumm
-      this.$bvModal.hide('my-modal')
-    },
-    stopTime(ps) {
+    hideModalTime(ps) {
       this.selectedPS = ps
       this.$bvModal.show('my-modal')
     },

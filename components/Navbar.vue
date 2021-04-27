@@ -30,21 +30,14 @@
             to="/realtime"
             >Real Time
           </b-nav-item>
+
           <b-nav-item
             class="nav-link"
             no-prefetch
             exact
             active-class="active"
-            to="/users"
-            >Users
-          </b-nav-item>
-          <b-nav-item
-            class="nav-link"
-            no-prefetch
-            exact
-            active-class="active"
-            to="/journal"
-            >Journal
+            to="/log"
+            >Log
           </b-nav-item>
         </b-navbar-nav>
 

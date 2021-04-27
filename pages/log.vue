@@ -3,33 +3,40 @@
     <Navbar />
     <b-table
       class="mt-5"
-      :striped="striped"
-      :bordered="bordered"
-      :borderless="borderless"
-      :outlined="outlined"
-      :small="small"
-      :hover="hover"
-      :dark="dark"
-      :fixed="fixed"
-      :foot-clone="footClone"
-      :no-border-collapse="noCollapse"
-      :items="getUsers"
+      striped
+      :items="items"
       :fields="fields"
       :head-variant="headVariant"
       :table-variant="tableVariant"
     >
+      <template #cell(start_time)="data">
+        {{ data.item.start_time | formatDate1 }}
+      </template>
+      <template #cell(end_time)="data">
+        {{ data.item.end_time | formatDate1 }}
+      </template>
+      <template #cell(sum)="data"> {{ data.item.sum }} ₸ </template>
     </b-table>
   </b-container>
 </template>
 
 <script>
 export default {
+  filters: {
+    formatDate1: (d) =>
+      d ? d.toLocaleTimeString('ru-RU').replace(',', '').slice(0, -3) : ' ',
+  },
+  date: new Date(),
   data() {
     return {
       fields: [
         {
           key: 'pc',
           label: 'PC',
+        },
+        {
+          key: 'user',
+          label: 'Аты-жөні',
         },
 
         {
@@ -40,18 +47,16 @@ export default {
           key: 'end_time',
           label: 'Аяқталуы',
         },
-        {
-          key: 'name',
-          label: 'Аты-жөні',
-        },
+
         { key: 'sum', label: 'Толық сумма' },
       ],
     }
   },
   computed: {
-    users() {
-      return this.$store.state.users
+    items() {
+      return this.$store.state.log.items
     },
   },
+  methods: {},
 }
 </script>
