@@ -39,6 +39,15 @@
             to="/log"
             >Log
           </b-nav-item>
+
+          <b-nav-item
+            class="nav-link"
+            no-prefetch
+            exact
+            active-class="active"
+            to="/balance"
+            >Balance
+          </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->

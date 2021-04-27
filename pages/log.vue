@@ -2,20 +2,25 @@
   <b-container class="mt-3">
     <Navbar />
     <b-table
+      id="table-transition-example"
       class="mt-5"
-      striped
       :items="items"
       :fields="fields"
-      :head-variant="headVariant"
-      :table-variant="tableVariant"
+      striped
+      small
     >
+      <template #cell(user)="data">
+        <b-badge variant="info"> {{ data.item.user.name }} </b-badge>
+      </template>
       <template #cell(start_time)="data">
         {{ data.item.start_time | formatDate1 }}
       </template>
       <template #cell(end_time)="data">
         {{ data.item.end_time | formatDate1 }}
       </template>
-      <template #cell(sum)="data"> {{ data.item.sum }} ₸ </template>
+      <template #cell(sum)="data">
+        <b-badge variant="success">{{ data.item.sum }} ₸</b-badge></template
+      >
     </b-table>
   </b-container>
 </template>
@@ -37,6 +42,7 @@ export default {
         {
           key: 'user',
           label: 'Аты-жөні',
+          sortable: true,
         },
 
         {

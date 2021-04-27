@@ -1,24 +1,7 @@
 <template>
   <b-container class="mt-3">
     <Navbar />
-    <b-table
-      class="mt-5"
-      :striped="striped"
-      :bordered="bordered"
-      :borderless="borderless"
-      :outlined="outlined"
-      :small="small"
-      :hover="hover"
-      :dark="dark"
-      :fixed="fixed"
-      :foot-clone="footClone"
-      :no-border-collapse="noCollapse"
-      :items="getUsers"
-      :fields="fields"
-      :head-variant="headVariant"
-      :table-variant="tableVariant"
-    >
-    </b-table>
+    <b-table class="mt-5" :items="getUsers" :fields="fields"> </b-table>
   </b-container>
 </template>
 

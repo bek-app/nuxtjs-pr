@@ -51,5 +51,10 @@ export const mutations = {
   },
   changePS({ state }, { ps, newData }) {
     Object.assign(ps, newData)
+    // ps.user = newData.user
+    // ps.busy = newData.busy
+    // ps.end_time = newData.end_time
+    // ps.start_time = newData.start_time
+    // ps.sum = newData.sum
   },
 }

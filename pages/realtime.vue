@@ -1,13 +1,7 @@
 <template>
   <b-container class="mt-3 wrap">
     <Navbar />
-    <b-table
-      class="mt-5"
-      responsive="md"
-      :items="items"
-      :fields="fields"
-      :tbody-tr-class="rowClass"
-    >
+    <b-table class="mt-5" responsive="sm" :items="items" :fields="fields" small>
       <template #cell(name)="data">
         {{ data.item.user && data.item.user.name }}
       </template>
@@ -24,7 +18,7 @@
         </h3>
       </template>
       <template #cell(sum)="data" class="text-center">
-        {{ data.item.sum }} ₸
+        <b-badge variant="warning">{{ data.item.sum }} ₸</b-badge>
       </template>
       <template #cell(btn)="data">
         <b-button
@@ -32,6 +26,7 @@
           v-b-modal="'my-modal'"
           variant="danger"
           block
+          size="sm"
           @click="hideModalTime(data.item)"
         >
           Жабу</b-button
@@ -40,20 +35,22 @@
         <b-button
           v-else
           block
+          size="sm"
           variant="primary"
           @click="showModalTime(data.item)"
           >Ашу</b-button
         >
       </template>
     </b-table>
-    <b-modal id="my-modal" hide-footer>
-      <b-button block variant="primary" @click="closeTime()"
-        >pc жабу</b-button
+    <b-modal id="my-modal" size="sm" hide-footer>
+      <template #modal-title> Уақытты жаба берейін бе? </template>
+      <b-button size="sm" block variant="primary" @click="closeTime()"
+        >Ия</b-button
       ></b-modal
     >
     <div>
       <b-modal id="bv-modal-example" hide-footer>
-        <template #modal-title> Журналға енгізу </template>
+        <template #modal-title> Уақыт қосу</template>
         <div class="d-block text-center">
           <div>
             <b-form-select
@@ -155,7 +152,7 @@ export default {
         ((endTime - this.selectedPS.start_time) / 1000 / 3600) * 800
       )
       const logItem = {
-        user: this.selectedPS.user.name,
+        user: this.selectedPS.user,
         start_time: this.selectedPS.start_time,
         pc: this.selectedPS.pc,
         end_time: endTime,
