@@ -1,7 +1,14 @@
 <template>
   <b-container class="mt-3">
     <Navbar />
-    <b-table class="mt-5" :items="users" :fields="fields"> </b-table>
+    <b-table class="mt-5" responsive="sm" small :items="users" :fields="fields">
+      <template #cell(balance)="data">
+        <b-badge variant="success">{{ data.item.balance }} ₸</b-badge></template
+      >
+    </b-table>
+    <template #cell(name)="data">
+      <b-badge variant="success">{{ data.item.name }} </b-badge></template
+    >
   </b-container>
 </template>
 

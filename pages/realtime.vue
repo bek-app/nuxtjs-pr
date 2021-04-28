@@ -3,7 +3,7 @@
     <Navbar />
     <b-table class="mt-5" responsive="sm" :items="items" :fields="fields" small>
       <template #cell(name)="data">
-        {{ data.item.user && data.item.user.name }}
+        {{ getUserNameById(data.item.userId) }}
       </template>
       <template #cell(start_time)="data">
         {{ data.item.start_time | formatDate1 }}
@@ -125,13 +125,17 @@ export default {
     },
   },
   methods: {
+    getUserNameById(userID) {
+      if (!userID) {
+        return ''
+      }
+      return this.users.find((user) => user.id === userID).name
+    },
     addItem() {
       if (!this.selectedUserId) return
-      const selectedUser = this.users.find(
-        (user) => user.id === this.selectedUserId
-      )
+
       const newData = {
-        user: selectedUser,
+        userId: this.selectedUserId,
         busy: true,
         end_time: null,
         start_time: new Date(),
@@ -152,7 +156,7 @@ export default {
         ((endTime - this.selectedPS.start_time) / 1000 / 3600) * 800
       )
       const logItem = {
-        user: this.selectedPS.user,
+        userId: this.selectedPS.userId,
         start_time: this.selectedPS.start_time,
         pc: this.selectedPS.pc,
         end_time: endTime,
@@ -162,7 +166,7 @@ export default {
       this.$store.commit('log/addLog', logItem)
 
       const newData = {
-        user: null,
+        userId: null,
         busy: false,
         end_time: endTime,
         start_time: null,

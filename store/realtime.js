@@ -1,7 +1,7 @@
 export const state = () => ({
   items: [
     {
-      user: null,
+      userId: null,
       start_time: null,
       pc: 'PC1',
       end_time: null,
@@ -9,7 +9,7 @@ export const state = () => ({
       busy: false,
     },
     {
-      user: null,
+      userId: null,
       start_time: null,
       pc: 'PC2',
       end_time: null,
@@ -17,7 +17,7 @@ export const state = () => ({
       busy: false,
     },
     {
-      user: null,
+      userId: null,
       start_time: null,
       pc: 'PC3',
       end_time: null,
@@ -25,7 +25,7 @@ export const state = () => ({
       busy: false,
     },
     {
-      user: null,
+      userId: null,
       start_time: null,
       pc: 'PC4',
       end_time: null,
@@ -33,7 +33,7 @@ export const state = () => ({
       busy: false,
     },
     {
-      user: null,
+      userId: null,
       start_time: null,
       pc: 'PC5',
       end_time: null,
@@ -51,7 +51,7 @@ export const mutations = {
   },
   changePS({ state }, { ps, newData }) {
     Object.assign(ps, newData)
-    // ps.user = newData.user
+    // ps.userId = newData.userId
     // ps.busy = newData.busy
     // ps.end_time = newData.end_time
     // ps.start_time = newData.start_time

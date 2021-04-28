@@ -10,7 +10,7 @@ export const mutations = {
     state.items.push(logItem)
 
     this.commit('users/changeBalance', {
-      name: logItem.user.name,
+      userId: logItem.userId,
       balance: logItem.sum,
     })
   },

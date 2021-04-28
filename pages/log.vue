@@ -10,7 +10,9 @@
       small
     >
       <template #cell(user)="data">
-        <b-badge variant="info"> {{ data.item.user.name }} </b-badge>
+        <b-badge variant="info">
+          {{ getUserNameById(data.item.userId) }}
+        </b-badge>
       </template>
       <template #cell(start_time)="data">
         {{ data.item.start_time | formatDate1 }}
@@ -62,7 +64,17 @@ export default {
     items() {
       return this.$store.state.log.items
     },
+    users() {
+      return this.$store.state.users.users
+    },
   },
-  methods: {},
+  methods: {
+    getUserNameById(userID) {
+      if (!userID) {
+        return ''
+      }
+      return this.users.find((user) => user.id === userID).name
+    },
+  },
 }
 </script>

@@ -7,17 +7,13 @@ export const state = () => ({
     { id: 5, name: 'Islam', balance: 0 },
     { id: 6, name: 'Jandos', balance: 0 },
     { id: 7, name: 'Nurlan', balance: 0 },
-    { id: 8, name: 'Erbol', balance: 1000 },
-    { id: 9, name: 'Erman', balance: 100 },
-    { id: 10, name: 'Saken', balance: 100 },
-    { id: 11, name: 'Meirambek', balance: 100 },
   ],
 })
 
 export const mutations = {
-  changeBalance(state, { name, balance }) {
+  changeBalance(state, { userId, balance }) {
     const user = state.users.find((user) => {
-      return user.name === name
+      return user.id === userId
     })
     user.balance += balance
   },
