@@ -3,21 +3,21 @@
     <Navbar />
     <div class="product__input">
       <b-form-input
-        class="input"
-        v-model="text"
+        class="input mr-3"
+        v-model.trim="text"
         placeholder="Тауар аты"
       ></b-form-input>
       <b-form-input
-        class="input"
+        class="input mr-3"
         v-model.number="number"
         type="number"
       ></b-form-input>
       <b-button variant="success" @click="addProduct">Қосу</b-button>
     </div>
-    <div class="table">
+    <div>
       <b-table
         id="table-transition-example"
-        class="mt-3"
+        class="mt-5 table"
         :items="products"
         :fields="fields"
         striped
@@ -39,8 +39,8 @@
             >Өзгерту</b-button
           >
           <b-button size="sm" variant="danger" @click="removeSum()">
-            Өшіру</b-button
-          >
+            Өшіру
+          </b-button>
         </template>
       </b-table>
       <b-modal id="my-modal" size="sm" hide-footer>
@@ -51,7 +51,7 @@
           ></template
         >
         <b-form-input
-          class="input"
+          class="input mb-2"
           v-model.number="numberChange"
           type="number"
         ></b-form-input>
@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     addProduct() {
-      if (!this.text && !this.number) return
+      if (!this.text || !this.number) return
       let maxId = 0
       this.products.forEach((product) => {
         if (product.id > maxId) {
@@ -166,14 +166,10 @@ export default {
   display: flex;
   justify-content: space-around;
   margin-top: 30px;
-  padding: 0 15px;
+  padding: 0 10px;
 }
 
-.input {
-  margin-right: 10px;
-  margin-bottom: 15px;
-}
 .table {
-  padding: 0 15px;
+  border: 1px solid rgb(219, 214, 214);
 }
 </style>

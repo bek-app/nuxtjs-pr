@@ -3,7 +3,7 @@
     <Navbar />
     <b-table
       id="table-transition-example"
-      class="mt-5"
+      class="mt-5 table"
       :items="items"
       :fields="fields"
       striped
@@ -78,3 +78,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.table {
+  border: 1px solid rgb(219, 214, 214);
+}
+</style>

@@ -19,18 +19,19 @@
       </b-form-select>
       <b-button variant="success" @click="addSelected">Енгізу</b-button>
     </div>
-    <div class="table">
+    <div>
       <b-table
         id="table-transition-example"
-        class="mt-5"
+        class="mt-2 table"
         :items="items"
         :fields="fields"
         striped
         small
       >
         <template #cell(id)="data">
-          {{ data.item.userId }}
+          {{ data.index + 1 }}
         </template>
+
         <template #cell(user)="data">
           {{ getUserNameById(data.item.userId) }}
         </template>
@@ -63,7 +64,7 @@ export default {
         },
         {
           key: 'user',
-          label: 'Аты-жөні',
+          label: 'Аты',
           sortable: true,
         },
         {
@@ -78,7 +79,7 @@ export default {
           sortable: true,
         },
 
-        { key: 'sum', label: 'Толық сумма' },
+        { key: 'sum', label: 'Cумма' },
       ],
       selectedUserId: null,
       selectedProductId: null,
@@ -117,7 +118,7 @@ export default {
       return this.products.find((product) => product.id === productID).sum
     },
     addSelected() {
-      if (!this.selectedUserId && !this.selectedProductId) return
+      if (!this.selectedUserId || !this.selectedProductId) return
       const sum = this.products.find(
         (product) => product.id === this.selectedProductId
       ).sum
@@ -136,7 +137,7 @@ export default {
 .selected__container {
   display: flex;
   justify-content: space-around;
-  margin-top: 50px;
+  margin-top: 20px;
   padding: 15px;
 }
 
@@ -144,6 +145,6 @@ export default {
   margin-right: 10px;
 }
 .table {
-  padding: 0 15px;
+  border: 1px solid rgb(219, 214, 214);
 }
 </style>

@@ -1,14 +1,21 @@
 <template>
   <b-container class="mt-3">
     <Navbar />
-    <b-table class="mt-5" responsive="sm" small :items="users" :fields="fields">
+    <b-table
+      class="mt-5 table"
+      responsive="sm"
+      striped
+      small
+      :items="users"
+      :fields="fields"
+    >
       <template #cell(balance)="data">
         <b-badge variant="success">{{ data.item.balance }} ₸</b-badge></template
       >
+      <template #cell(name)="data">
+        <b-badge variant="warning">{{ data.item.name }} </b-badge></template
+      >
     </b-table>
-    <template #cell(name)="data">
-      <b-badge variant="success">{{ data.item.name }} </b-badge></template
-    >
   </b-container>
 </template>
 
@@ -39,3 +46,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.table {
+  border: 1px solid rgb(219, 214, 214);
+}
+</style>

@@ -1,7 +1,19 @@
 <template>
   <b-container class="mt-3 wrap">
     <Navbar />
-    <b-table class="mt-5" responsive="sm" :items="items" :fields="fields" small>
+    <b-table
+      class="mt-5 table"
+      responsive="sm"
+      :items="items"
+      :fields="fields"
+      small
+    >
+      <template #cell(pc)="data">
+        <b-badge v-if="data.item.busy" variant="danger">
+          {{ data.item.pc }}
+        </b-badge>
+        <b-badge v-else variant="success"> {{ data.item.pc }} </b-badge>
+      </template>
       <template #cell(name)="data">
         {{ getUserNameById(data.item.userId) }}
       </template>
@@ -11,12 +23,7 @@
       <template #cell(end_time)="data">
         {{ data.item.end_time | formatDate1 }}
       </template>
-      <template #cell(status)="data">
-        <h3>
-          <b-badge v-if="data.item.busy" variant="danger">бос емес</b-badge>
-          <b-badge v-else variant="success">бос</b-badge>
-        </h3>
-      </template>
+
       <template #cell(sum)="data" class="text-center">
         <b-badge variant="warning">{{ data.item.sum }} ₸</b-badge>
       </template>
@@ -25,7 +32,6 @@
           v-if="data.item.busy"
           v-b-modal="'my-modal'"
           variant="danger"
-          block
           size="sm"
           @click="hideModalTime(data.item)"
         >
@@ -34,7 +40,6 @@
 
         <b-button
           v-else
-          block
           size="sm"
           variant="primary"
           @click="showModalTime(data.item)"
@@ -89,23 +94,18 @@ export default {
         },
         {
           key: 'name',
-          label: 'Аты-жөні',
+          label: 'Аты',
         },
         {
           key: 'start_time',
           label: 'Басталуы',
-          sortable: true,
         },
         {
           key: 'end_time',
           label: 'Аяқталуы',
-          sortable: true,
         },
-        {
-          key: 'status',
-          label: 'Статусы',
-        },
-        { key: 'sum', label: 'Толық сумма' },
+
+        { key: 'sum', label: 'Cумма' },
         {
           key: 'btn',
           label: '',
@@ -193,4 +193,8 @@ export default {
   },
 }
 </script>
-<style scoped></style>
+<style scoped>
+.table {
+  border: 1px solid rgb(219, 214, 214);
+}
+</style>
