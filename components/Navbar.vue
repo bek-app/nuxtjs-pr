@@ -16,7 +16,7 @@
         <b-navbar-nav>
           <b-nav-item
             class="nav-link"
-            no-prefetchА
+            no-prefetchа
             exact
             active-class="active"
             to="/realtime"
@@ -39,6 +39,14 @@
             active-class="active"
             to="/balance"
             >Balance
+          </b-nav-item>
+          <b-nav-item
+            class="nav-link"
+            no-prefetch
+            exact
+            active-class="active"
+            to="/products"
+            >Products
           </b-nav-item>
           <b-nav-item
             class="nav-link"

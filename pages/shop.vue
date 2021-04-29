@@ -3,15 +3,15 @@
     <Navbar />
     <div class="selected__container">
       <b-form-select
-        class="my-select"
         v-model="selectedUserId"
+        class="my-select"
         :options="users"
         value-field="id"
         text-field="name"
       ></b-form-select>
       <b-form-select
-        class="my-select"
         v-model="selectedProductId"
+        class="my-select"
         :options="products"
         value-field="id"
         text-field="name"
@@ -87,14 +87,14 @@ export default {
 
   computed: {
     items() {
-      return this.$store.state.shop_log.items
+      return this.$store.state.shopLog.items
     },
 
     users() {
       return this.$store.state.users.users
     },
     products() {
-      return this.$store.state.shop.products
+      return this.$store.state.products.products
     },
   },
   methods: {
@@ -127,7 +127,7 @@ export default {
         productId: this.selectedProductId,
         sum,
       }
-      this.$store.commit('shop_log/addSelected', newData)
+      this.$store.commit('shopLog/addSelected', newData)
     },
   },
 }
