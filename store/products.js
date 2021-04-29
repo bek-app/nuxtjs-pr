@@ -22,9 +22,10 @@ export const mutations = {
     })
     state.products.splice(findId, 1)
   },
-  changeSum(state, sum) {
-    state.products.find((product) => {
-      return product.sum === sum
+  changeSum(state, newData) {
+    const findSum = state.products.find((product) => {
+      return product.id === newData.id
     })
+    findSum.sum = newData.sum
   },
 }
