@@ -6,8 +6,8 @@
         no-prefetch
         exact
         active-class="active"
-        to="/"
-        >NuxtJs</b-navbar-brand
+        to="/realtime"
+        >PS4</b-navbar-brand
       >
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -16,15 +16,7 @@
         <b-navbar-nav>
           <b-nav-item
             class="nav-link"
-            no-prefetch
-            exact
-            active-class="active"
-            to="/"
-            >Home
-          </b-nav-item>
-          <b-nav-item
-            class="nav-link"
-            no-prefetch
+            no-prefetchА
             exact
             active-class="active"
             to="/realtime"
@@ -47,6 +39,14 @@
             active-class="active"
             to="/balance"
             >Balance
+          </b-nav-item>
+          <b-nav-item
+            class="nav-link"
+            no-prefetch
+            exact
+            active-class="active"
+            to="/shop"
+            >Shop
           </b-nav-item>
         </b-navbar-nav>
 
