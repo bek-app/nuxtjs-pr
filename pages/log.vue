@@ -43,8 +43,7 @@ export default {
         },
         {
           key: 'user',
-          label: 'Аты-жөні',
-          sortable: true,
+          label: 'Аты',
         },
 
         {
@@ -56,7 +55,7 @@ export default {
           label: 'Аяқталуы',
         },
 
-        { key: 'sum', label: 'Толық сумма' },
+        { key: 'sum', label: 'Cумма' },
       ],
     }
   },

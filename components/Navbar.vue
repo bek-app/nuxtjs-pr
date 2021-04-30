@@ -1,6 +1,6 @@
 <template>
   <b-container class="container">
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar class="mt-2" toggleable="lg" type="dark" variant="info">
       <b-navbar-brand
         class="nav-link"
         no-prefetch
@@ -79,8 +79,8 @@
 export default {}
 </script>
 <style scoped>
-body {
-  font-family: 'Antonio', sans-serif;
+.container {
+  padding: 0;
 }
 .nav-link {
   text-transform: uppercase;
