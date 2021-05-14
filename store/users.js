@@ -1,13 +1,5 @@
 export const state = () => ({
-  users: [
-    { id: 1, name: 'Maksat', balance: 0 },
-    { id: 2, name: 'Sultan', balance: 0 },
-    { id: 3, name: 'Esimkhan', balance: 0 },
-    { id: 4, name: 'Erjan', balance: 0 },
-    { id: 5, name: 'Islam', balance: 0 },
-    { id: 6, name: 'Jandos', balance: 0 },
-    { id: 7, name: 'Nurlan', balance: 0 },
-  ],
+  users: [],
 })
 
 export const mutations = {
@@ -16,5 +8,20 @@ export const mutations = {
       return user.id === userId
     })
     user.balance += balance
+  },
+  setUsers(state, users) {
+    state.users = users
+  },
+}
+
+export const actions = {
+  async getUsers({ commit }) {
+    const users = await this.$axios
+      .$get('https://jsonplaceholder.typicode.com/users')
+      .catch((error) => {
+        console.log(error)
+      })
+
+    commit('setUsers', users)
   },
 }

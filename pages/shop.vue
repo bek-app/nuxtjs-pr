@@ -1,6 +1,5 @@
 <template>
   <b-container class="mt-3">
-    <Navbar />
     <div class="selected__container">
       <b-form-select
         v-model="selectedUserId"
@@ -27,6 +26,7 @@
         :fields="fields"
         striped
         small
+        responsive
       >
         <template #cell(id)="data">
           {{ data.index + 1 }}
@@ -41,9 +41,7 @@
         <template #cell(start_time)="data">
           {{ data.item.start_time | formatDate1 }}
         </template>
-        <template #cell(sum)="data">
-          <b-badge variant="info"> {{ data.item.sum }} ₸ </b-badge>
-        </template>
+        <template #cell(sum)="data"> {{ data.item.sum }} ₸ </template>
       </b-table>
     </div>
   </b-container>
@@ -65,18 +63,15 @@ export default {
         {
           key: 'user',
           label: 'Аты',
-          sortable: true,
         },
         {
           key: 'start_time',
           label: 'Уақыты',
-          sortable: true,
         },
 
         {
           key: 'product_name',
           label: 'Тауар аты',
-          sortable: true,
         },
 
         { key: 'sum', label: 'Cумма' },
@@ -138,13 +133,13 @@ export default {
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
-  padding: 15px;
 }
 
 .my-select {
   margin-right: 10px;
 }
-.table {
-  border: 1px solid rgb(219, 214, 214);
+tr {
+  display: flex;
+  align-items: center;
 }
 </style>

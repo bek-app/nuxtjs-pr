@@ -1,6 +1,5 @@
 <template>
   <b-container class="mt-3">
-    <Navbar />
     <div class="product__input">
       <b-form-input
         class="input mr-3"

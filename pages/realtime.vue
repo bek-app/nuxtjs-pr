@@ -1,6 +1,5 @@
 <template>
   <b-container class="mt-3 wrap">
-    <Navbar />
     <b-table
       class="mt-5 table"
       responsive="sm"
@@ -116,14 +115,21 @@ export default {
       selectedUserId: null,
     }
   },
+
+  mounted() {
+    this.$store.dispatch('users/getUsers')
+  },
+
   computed: {
     items() {
       return this.$store.state.realtime.items
     },
+
     users() {
       return this.$store.state.users.users
     },
   },
+
   methods: {
     getUserNameById(userID) {
       if (!userID) {

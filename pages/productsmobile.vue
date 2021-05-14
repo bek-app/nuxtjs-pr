@@ -1,6 +1,5 @@
 <template>
   <b-container class="mt-3">
-    <Navbar />
     <div class="product__input">
       <b-form-input
         class="input"
@@ -12,7 +11,9 @@
         v-model.number="number"
         type="number"
       ></b-form-input>
-      <b-button variant="success" @click="addProduct">Қосу</b-button>
+      <b-button variant="success" class="btn" @click="addProduct"
+        >Қосу</b-button
+      >
     </div>
 
     <div class="cards" v-for="product in products" :key="product.id">
@@ -180,6 +181,10 @@ export default {
   .input {
     margin-bottom: 10px;
     margin-right: 0;
+  }
+  .btn {
+    display: block;
+    width: 100%;
   }
 }
 </style>

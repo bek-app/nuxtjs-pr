@@ -1,6 +1,5 @@
 <template>
   <b-container>
-    <Navbar />
     <div class="cards" v-for="item in items" :key="item.id">
       <b-card
         class="mt-3 mb-2 card"

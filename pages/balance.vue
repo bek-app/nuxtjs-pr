@@ -1,6 +1,5 @@
 <template>
   <b-container class="mt-3">
-    <Navbar />
     <b-table
       class="mt-5 table"
       responsive="sm"
