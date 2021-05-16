@@ -66,6 +66,7 @@ export default {
         })
       }
     },
+    babel: { compact: true },
   },
   server: {
     port: process.env.PORT || 8000,
