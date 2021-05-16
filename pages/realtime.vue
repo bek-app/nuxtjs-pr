@@ -116,9 +116,9 @@ export default {
     }
   },
 
-  mounted() {
-    this.$store.dispatch('users/getUsers')
-  },
+  // mounted() {
+  //   this.$store.dispatch('users/getUsers')
+  // },
 
   computed: {
     items() {
