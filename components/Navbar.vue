@@ -1,13 +1,13 @@
 <template>
   <b-container class="container">
-    <b-navbar class="mt-2" toggleable="lg" type="dark" variant="info">
+    <b-navbar toggleable="lg" type="dark" variant="info">
       <b-navbar-brand
         class="nav-link"
         no-prefetch
         exact
         active-class="active"
-        to="/realtime"
-        >PS4</b-navbar-brand
+        to="/"
+        >PS5</b-navbar-brand
       >
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
